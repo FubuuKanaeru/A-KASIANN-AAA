@@ -16,9 +16,9 @@ class Buku extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    protected $listeners = ['pilihKategori','semuaKategori'];
+    protected $listeners = ['pilihKategori', 'semuaKategori'];
 
-    public $kategori_id, $pilih_kategori ,$buku_id, $detail_Buku, $Search;
+    public $kategori_id, $pilih_kategori, $buku_id, $detail_Buku, $search;
 
     public function pilihKategori($id)
     {
@@ -27,6 +27,7 @@ class Buku extends Component
         $this->pilih_kategori = true;
         $this->updatingSearch();
     }
+
     public function semuaKategori()
     {
         $this->format();
@@ -36,10 +37,9 @@ class Buku extends Component
 
     public function detailBuku($id)
     {
-        $this->format();    
+        $this->format();
         $this->detail_Buku = true;
         $this->buku_id = $id;
-
     }
 
     public function keranjang(ModelsBuku $buku)
@@ -73,9 +73,9 @@ class Buku extends Component
                             'peminjaman_id' => $peminjaman_baru->id,
                             'buku_id' => $buku->id
                         ]);
-                        
+
                         $this->dispatch('tambahKeranjang');
-                        session()->flash('Sukses', 'Buku berhasil ditambahkan ke dalam keranjang');
+                        session()->flash('sukses', 'Buku berhasil ditambahkan ke dalam keranjang');
                     } else {
 
                         // buku tidak boleh sama
@@ -89,7 +89,7 @@ class Buku extends Component
                             ]);
 
                             $this->dispatch('tambahKeranjang');
-                            session()->flash('Sukses', 'Buku berhasil ditambahkan ke dalam keranjang');
+                            session()->flash('sukses', 'Buku berhasil ditambahkan ke dalam keranjang');
                         }
 
                     }
@@ -106,44 +106,41 @@ class Buku extends Component
         }
         
     }
-    
+
     public function updatingSearch()
     {
         $this->resetPage();
     }
- 
-    public function format(){
-        $this->detail_Buku = false;
-        $this->pilih_kategori = false;
-        unset($buku_id);
-        unset($kategori_id);
-    }
 
     public function render()
     {
-
         if ($this->pilih_kategori) {
-
-            if ($this->Search) {
-                $buku = ModelsBuku::latest()->where('judul','like','%'.$this->Search.'%')->where('kategori_id', $this->kategori_id)->paginate(12);
+            if ($this->search) {
+                $buku = ModelsBuku::latest()->where('judul', 'like', '%'. $this->search .'%')->where('kategori_id', $this->kategori_id)->paginate(12);
             } else {
                 $buku = ModelsBuku::latest()->where('kategori_id', $this->kategori_id)->paginate(12);
             }
-
-            $title = Kategori::find($this->kategori_id)->name;
-
-        } elseif ($this->detail_Buku){
+            $title = Kategori::find($this->kategori_id)->nama;
+        }elseif ($this->detail_Buku) {
             $buku = ModelsBuku::find($this->buku_id);
-            $title = 'Detail buku';
+            $title = 'Detail Buku';
         } else {
-            if ($this->Search) {
-                $buku = ModelsBuku::latest()->where('judul', 'like', '%' . $this->Search . '%')->paginate(12);
+            if ($this->search) {
+                $buku = ModelsBuku::latest()->where('judul', 'like', '%'. $this->search .'%')->paginate(12);
             } else {
                 $buku = ModelsBuku::latest()->paginate(12);
             }
             $title = 'Semua Buku';
         }
         
-        return view('livewire.anggota.buku',compact('buku','title'));
+        return view('livewire.anggota.buku', compact('buku', 'title'));
+    }
+
+    public function format()
+    {
+        $this->detail_Buku = false;
+        $this->pilih_kategori = false;
+        unset($this->buku_id);
+        unset($this->kategori_id);
     }
 }

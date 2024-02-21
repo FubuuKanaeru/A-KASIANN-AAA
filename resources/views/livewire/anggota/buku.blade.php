@@ -68,12 +68,10 @@
                   </tr>
                 </tbody>
               </table>
-              <button wire:click="keranjang({{ $buku->id }})" class="btn btn-success">Keranjang</button>
+              <button wire:click="keranjang({{ $buku->id }})" class="btn btn-success">Favorit</button>
+              <a href="/ulasan" class="btn btn-primary">Ulas Buku</a>
         </div>
     </div>
-
-
-        
     @else
 
     @if ($buku->isNotEmpty())
@@ -95,7 +93,6 @@
         {{ $buku->links()}}
     </div>
     @else
-
     <div class="alert alert-danger">
         Mohon maaf buku belum tersedia
     </div>

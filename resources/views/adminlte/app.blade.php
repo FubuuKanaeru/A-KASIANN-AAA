@@ -41,6 +41,7 @@
 
 <!-- jQuery -->
 @include('adminlte/javascript')
+@include('adminlte/script')
 @livewireScripts
 </body>
 </html>

@@ -61,7 +61,6 @@ public function update(ModelsKategori $kategori ){
     public function Edit(ModelsKategori $kategori){
       
         $this->format();
-    
         $this->edit = true;
         $this->nama = $kategori->name;
         $this->kategori_id = $kategori->id;

@@ -6,7 +6,7 @@ use App\Models\Peminjaman;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Carbon\Carbon;
-use App\Models\User;
+use App\Models\User as Modelsuser;
 
 
 
@@ -15,7 +15,7 @@ class Transaksi extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $belum_dipinjam, $sedang_dipinjam, $selesai_dipinjam, $search ,$dtuser;        
+    public $belum_dipinjam, $sedang_dipinjam, $selesai_dipinjam, $search ,$datauser;        
 
     public function belumDipinjam()
     {
@@ -51,6 +51,7 @@ class Transaksi extends Component
         session()->flash('Sukses', 'Buku berhasil dipinjamakan.');
     }
 
+    //Kembali
     public function kembali(Peminjaman $peminjaman)
     {
         $data = [
@@ -82,11 +83,6 @@ class Transaksi extends Component
     public function updatingSearch()
     {
         $this->resetPage();
-    }
-
-    public function index()
-    {
-       
     }
 
     public function render()

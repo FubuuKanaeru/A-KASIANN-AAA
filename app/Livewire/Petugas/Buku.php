@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Features\SupportConsoleCommands\Comands\Upgrade\ThirdPartyUpgradeNotice;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Buku extends Component
 {
@@ -24,7 +24,7 @@ class Buku extends Component
     public $create, $edit, $delete,$show;
     public $judul, $stok, $penulis, $sampul, $Sampul;
     public $kategori_id, $penerbit_id, $rak_id, $buku_id, $baris;
-    public $kategori, $rak, $penerbit ,$search;
+    public $kategori, $rak, $penerbit ,$search,$pdf,$buku1 ;
 
     protected $rules = [
         'judul' => 'required',
@@ -177,18 +177,37 @@ public function Delete(ModelsBuku $buku){
         $this->baris = $buku->rak->baris;
     }
 
+
     public function updatingSearch()
     {
         $this->resetPage();
+    }
+
+    public function mount(){
+
+        $this->buku1=Buku::all();
+    }
+
+    public function buatPdf(){
+
+        $data=[
+            'data_buku' => Buku::all()
+        ];
+        
+        $pdf = Pdf::loadView('pdf.laporan', $data);
+        return response()->streamDownload(function() use($pdf){
+            echo $pdf->stream();
+        },'data.pdf');
+
     }
 
     public function render()
     {
 
         if ($this->search) {
-            $buku = ModelsBuku::latest()->where('judul','LIKE','%'. $this->search .'%')->paginate(5);
+            $buku = ModelsBuku::latest()->where('judul','LIKE','%'. $this->search .'%')->paginate(10);
         } else {
-            $buku =  ModelsBuku::latest()->paginate(5);
+            $buku =  ModelsBuku::latest()->paginate(10);
         }
         return view('livewire.petugas.buku',[
             'buku' =>  $buku

@@ -2,7 +2,7 @@
         <div class="col-12">
           
     @include('admin/user/create')
-    {{-- @include('petugas/kategori/edit') --}}
+    @include('admin/user/edit')
     {{-- @include('petugas/kategori/delete') --}}
     @include('adminlte/flash')
 
@@ -15,7 +15,7 @@
               <div class="card">
                 <div class="card-header">
                     @if ($admin || $petugas || $anggota )
-                    <span wire:click="create" class="btn btn-sm btn-primary">Tambah</span>
+                    <span wire:click="Create" class="btn btn-sm btn-primary">Tambah</span>
                     @endif
                   
                      
@@ -40,6 +40,10 @@
                             <th width="10%">No</th>
                             <th>Nama</th>
                             <th>Role</th>
+                            @if ( $petugas || $anggota )
+                            <th>Aksi</th>
+                            @endif
+                          
                         </tr>
                         </thead>
                         <tbody>
@@ -56,6 +60,13 @@
                                         <span class="badge bg-fuchsia">Peminjam</span>
                                     @endif
                                 </td>
+                                <td>
+                                    @if ( $petugas || $anggota )
+                                    <div class="btn-group md-5">
+                                        <span wire:click="Edit" class="btn btn-sm btn-primary">Edit</span>
+                                       </div>
+                                    @endif 
+                               </td>
                             </tr>
                         @endforeach
                         </tbody>

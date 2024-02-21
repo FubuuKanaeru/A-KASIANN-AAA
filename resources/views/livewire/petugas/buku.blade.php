@@ -1,3 +1,4 @@
+
 <div class="row">
     <div class="col-12">
       
@@ -6,12 +7,13 @@
         @include('petugas/buku/delete')
         @include('petugas/buku/show')
         @include('adminlte/flash')
+        @include('adminlte.script')
         
         <div class="card">
             <div class="card-header">
                 <span wire:click="Create" class="btn btn-sm btn-primary">Tambah</span>
-                 
-             
+                <span wire:click="buatPdf" class="btn btn-sm btn-primary">Ekspor Pdf</span>
+              
               <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                 <input wire:model.live.throttle.500ms="search" type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -36,6 +38,7 @@
                 <th>Judul</th>
                 <th>Penulis</th>
                 <th>Kategori</th>
+                <th>Stok</th>
                 <th widht="15%">Aksi</th>
               </tr>
         </thead>
@@ -44,15 +47,17 @@
           <tr>
                 <td>{{ $loop -> iteration }}</td>
                 <td><img src="/storage/{{$item->sampul}}" alt="{{$item->judul}}" width="60" height="80"></td>
-            
                 <td>{{ $item -> judul }}</td>
                 <td>{{ $item -> penulis }}</td>
                 <td>{{ $item -> kategori->name }}</td>
+                <td>{{ $item -> stok }}</td>
                 <td>
                 <div class="btn-group">
                     <span wire:click="Show({{ $item->id }})" class="btn btn-sm btn-success mr-2">Lihat</span>
+                    @role('admin')
                     <span wire:click="Edit({{ $item->id }})" class="btn btn-sm btn-primary mr-2">Edit</span>
                     <span wire:click="Delete({{ $item->id }})" class="btn btn-sm btn-danger">Hapus</span>
+                    @endrole
                 </div>
           </td>
           </tr>
@@ -81,5 +86,9 @@
 </div>
 </div>
 
-    
+
+
+
+
+
     

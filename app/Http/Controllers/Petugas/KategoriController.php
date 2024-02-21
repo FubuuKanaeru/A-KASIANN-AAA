@@ -23,7 +23,15 @@ class KategoriController extends Controller
         }
         return view('livewire.petugas.kategori',compact('kategori')); 
      }
+
      
+    public function view_pdf()
+    {
+        $kategori = Kategori::all();
+        return view ('pdf.laporan')->with('kategori', $kategori);
+    }
+
+
     public function __invoke(Request $request)
     {
 

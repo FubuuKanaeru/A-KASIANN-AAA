@@ -19,7 +19,11 @@ class Peminjaman extends Model
         return $this->hasMany(DetailPeminjaman::class);
     }
 
-    public function user()
+    public function anggota()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function petugas_pinjam()
     {
         return $this->belongsTo(User::class);
     }
@@ -29,14 +33,14 @@ class Peminjaman extends Model
     {
         return $value ? "Rp. {$value}" : '-';
     }
-    public function gettanggalPinjamAttribute($value)
-    {
-        return Carbon::create($value)->format('d-m-Y');
-    }
-    public function gettanggalKembaliAttribute($value)
-    {
-        return Carbon::create($value)->format('d-m-Y');
-    }
+    // public function gettanggalPinjamAttribute($value)
+    // {
+    //     return Carbon::create($value)->format('d-m-Y');
+    // }
+    // public function gettanggalKembaliAttribute($value)
+    // {
+    //     return Carbon::create($value)->format('d-m-Y');
+    // }
 
 
 }

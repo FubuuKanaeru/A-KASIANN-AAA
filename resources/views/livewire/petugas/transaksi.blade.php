@@ -16,10 +16,8 @@
         
         <div class="card">
             <div class="card-header">
-                <span wire:click="Create" class="btn btn-sm btn-primary">Tambah</span>
-                 
-      
-              <div class="card-tools">
+          
+                <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                 <input wire:model.live.throttle.500ms="search" type="search" name="table_search" class="form-control float-right" placeholder="Search">
                 <div class="input-group-append">
@@ -38,6 +36,7 @@
               <tr>
                 <th width="10%">No</th>
                 <th>Kode pinjam</th>
+                <th>Nama Peminjam</th>
                 <th>Buku</th>
                 <th>Lokasi</th>
                 <th>Tanggal pinjam</th>
@@ -54,6 +53,7 @@
           <tr>
                 <td>{{ $loop -> iteration }}</td>
                 <td>{{ $item ->kode_pinjam }}</td>
+                <td>{{ $item ->anggota->name }}</td>
                 <td>
                 <ul>
                     @foreach ($item->detail_peminjaman as $detail_peminjaman)
@@ -115,5 +115,6 @@
       @endif
 
 </div>
+
     
     

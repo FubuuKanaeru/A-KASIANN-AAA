@@ -10,25 +10,24 @@ use App\Models\Peminjaman;
 class Kategori extends Component
 {
 
-    protected $listeners = ['tambahKeranjang','hapuskeranjang'];
+    protected $listeners = ['tambahKeranjang', 'kurangiKeranjang'];
 
     public $count;
 
-    public function mount() 
+    public function mount()
     {
         if (auth()->user()) {
-             $this->count = DB::table('peminjaman')
-            ->join('detail_peminjaman', 'peminjaman.id', '=', 'detail_peminjaman.peminjaman_id')
-            ->where('anggota_id', auth()->user()->id)
-            ->where('status', '!=', 3)
-            ->count();
-        } 
-        
+            $this->count = DB::table('peminjaman')
+                ->join('detail_peminjaman', 'peminjaman.id', '=', 'detail_peminjaman.peminjaman_id')
+                ->where('anggota_id', auth()->user()->id)
+                ->where('status', '!=', 3)
+                ->count();
+        }
     }
 
     public function pilihKategori($id)
     {
-        $this->dispatch('pilihKategori',$id);
+        $this->dispatch('pilihKategori', $id);
     }
 
     public function semuaKategori()
@@ -36,21 +35,20 @@ class Kategori extends Component
         $this->dispatch('semuaKategori');
     }
 
-    public function tambahKeranjang(){
-
+    public function tambahKeranjang()
+    {
         $this->count += 1;
-
     }
 
-    public function hapusKeranjang()
+    public function kurangiKeranjang()
     {
         $this->count -= 1;
     }
 
     public function render()
     {
-        return view('livewire.anggota.kategori',[
-            'kategori' => ModelsKategori::where('id','!=',1)->get(),
+        return view('livewire.anggota.kategori', [
+            'kategori' => ModelsKategori::where('id', '!=', 1)->get(),
             'count' => $this->count
         ]);
     }

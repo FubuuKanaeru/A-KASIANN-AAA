@@ -5,6 +5,7 @@
 @include('petugas/kategori/edit')
 @include('petugas/kategori/delete')
 @include('adminlte/flash')
+
           <div class="card">
             <div class="card-header">
                 <span wire:click="create" class="btn btn-sm btn-primary">Tambah</span>
@@ -29,7 +30,9 @@
                 <tr>
                   <th width="10%">No</th>
                   <th>kategori</th>
+                  @role('admin')
                   <th widht="15%">Aksi</th>
+                  @endrole
                 </tr>
           </thead>
           <tbody>
@@ -39,12 +42,15 @@
             <tr>
                   <td>{{ $loop -> iteration }}</td>
                   <td>{{ $item -> name }}</td>
+                  @role('admin')
                   <td>
-                      <div class="btn-group">
-                      <span wire:click="Edit({{ $item->id }})" class="btn btn-sm btn-primary mr-2">Edit</span>
-                      <span wire:click="Delete({{ $item->id }})" class="btn btn-sm btn-danger">Hapus</span>
-                     </div>
-                 </td>
+                    <div class="btn-group">
+                    <span wire:click="Edit({{ $item->id }})" class="btn btn-sm btn-primary mr-2">Edit</span>
+                    <span wire:click="Delete({{ $item->id }})" class="btn btn-sm btn-danger">Hapus</span>
+                   </div>
+               </td>
+                  @endrole
+                 
             </tr>
             @endif  
             @endforeach
@@ -71,7 +77,31 @@
       @endif
           </div>
     </div>    
+    
+ <!-- jQuery -->
+ @include('adminlte.script')
+ <script>
+   $(function() {
+       $("#example1").DataTable({
+           "responsive": true,
+           "lengthChange": false,
+           "autoWidth": false,
+           "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+       $('#example2').DataTable({
+           "paging": true,
+           "lengthChange": false,
+           "searching": false,
+           "ordering": true,
+           "info": true,
+           "autoWidth": false,
+           "responsive": true,
+       });
+   });
+ </script>
 </div>
+
+
 
 
   

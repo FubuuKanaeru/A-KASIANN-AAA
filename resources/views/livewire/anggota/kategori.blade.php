@@ -21,7 +21,6 @@
                         <div class="dropdwon-divider"></div>
                         @foreach ($kategori as $item)
                         <a class="dropdown-item" wire:click="pilihKategori({{ $item->id }})">{{ $item->name }}</a>
-                      
                         @endforeach
                     </div>
                 </li>
