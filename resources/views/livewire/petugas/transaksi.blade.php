@@ -1,9 +1,5 @@
 <div class="row">
     <div class="col-12">
-      
-        {{-- @include('petugas/rak/create') --}}
-        {{-- @include('petugas/rak/edit') --}}
-        {{-- @include('petugas/rak/delete') --}}
         @include('adminlte/flash')
 
       <div class="btn-group mb-3" >
@@ -12,8 +8,7 @@
         <button wire:click="sedangDipinjam" class="btn btn-sm bg-info mr-2">Sedang dipinjam</button>
         <button wire:click="selesaiDipinjam" class="btn btn-sm bg-success mr-2">Selesai dipinjam</button>
       </div>
- 
-        
+
         <div class="card">
             <div class="card-header">
           
@@ -41,6 +36,7 @@
                 <th>Lokasi</th>
                 <th>Tanggal pinjam</th>
                 <th>Tanggal kembali</th>
+                <th>Tanggal Pengembalian</th>
                 <th>Denda</th>
                 <th>Status</th>
                 @if (!$selesai_dipinjam)
@@ -70,6 +66,7 @@
                 </td>
                 <td>{{ $item ->tanggal_pinjam }}</td>
                 <td>{{ $item ->tanggal_kembali }}</td>
+                <td>{{ $item ->tanggal_pengembalian }}</td>
                 <td>{{ $item ->denda }}</td>
                 <td>
                     @if ($item->status == 1)

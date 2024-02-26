@@ -44,12 +44,10 @@
         <td>{{ $item->anggota->name }}</td>
         <td>{{ $item->tanggal_pinjam }}</td>
         <td>{{ $item->tanggal_kembali }}</td>
-        <td>
-          <ul>
+        <td>l
               @foreach ($item->detail_peminjaman as $detail_peminjaman)
                 <p>{{ $detail_peminjaman->buku->judul }}</p>
               @endforeach
-          </ul>
           </td>
           <td>{{ $item->denda }}</td>
           <td>{{ $item->status }}</td>

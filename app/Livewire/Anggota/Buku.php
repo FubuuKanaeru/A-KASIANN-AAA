@@ -7,6 +7,7 @@ use App\Models\DetailPeminjaman;
 use App\Models\DetailPeminjaman as DetailPeminjaman1;
 use App\Models\Kategori;
 use App\Models\Peminjaman;
+use App\Models\Ulasan;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ class Buku extends Component
 
     protected $listeners = ['pilihKategori', 'semuaKategori'];
 
-    public $kategori_id, $pilih_kategori, $buku_id, $detail_Buku, $search;
+    public $kategori_id, $pilih_kategori, $buku_id, $detail_Buku, $search,$ulasan;
 
     public function pilihKategori($id)
     {
@@ -46,7 +47,6 @@ class Buku extends Component
     {
         // user harus login
         if (auth()->user()) {
-            
             // role peminjam
             if (auth()->user()->hasRole('anggota')) {
                
@@ -107,6 +107,14 @@ class Buku extends Component
         
     }
 
+    //ulasan
+    public function create($id)
+    {
+
+        $this->ulasan = true;
+        $this->buku_id = $id;
+    }
+    
     public function updatingSearch()
     {
         $this->resetPage();

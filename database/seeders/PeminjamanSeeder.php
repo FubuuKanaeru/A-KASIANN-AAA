@@ -16,9 +16,9 @@ class PeminjamanSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 10; $i++){
+        for ($i=0; $i < 500; $i++){
             $faker = Factory::create('id_ID');
-            $tanggal_pinjam = $faker->dateTimeBetween('-6 months', '-2 week');
+            $tanggal_pinjam = $faker->dateTimeBetween('-10 months', '-2 week');
             $tanggal_kembali = Carbon::parse($tanggal_pinjam)->addDays(10);
             $tanggal_pengembalian = Carbon::parse($tanggal_pinjam)->addDays(10);
 

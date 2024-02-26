@@ -20,7 +20,7 @@ class Kategori extends Component
             $this->count = DB::table('peminjaman')
                 ->join('detail_peminjaman', 'peminjaman.id', '=', 'detail_peminjaman.peminjaman_id')
                 ->where('anggota_id', auth()->user()->id)
-                ->where('status', '!=', 3)
+                // ->where('status', '!=', 3)
                 ->count();
         }
     }

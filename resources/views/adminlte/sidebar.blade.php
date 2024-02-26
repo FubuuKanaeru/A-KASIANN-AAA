@@ -82,7 +82,14 @@
             </p>
           </a>
       </li>
-
+        <li class="nav-item">
+          <a href="/Chart"class="nav-link"> @yield('active-Chart ')
+            <i class="fas fa-chart-bar"></i>
+            <p>
+              Chart
+            </p>
+          </a>
+      </li>
         <li class="nav-item">
           <a href="/pdf/buku/laporan"class="nav-link"> @yield('active-transaksi ')
             <i class="fas fa-book"></i>
@@ -96,6 +103,14 @@
             <i class="fas fa-book"></i>
             <p>
          Laporan Transaksi
+            </p>
+          </a>
+      </li>
+        <li class="nav-item">
+          <a href="/ulasan"class="nav-link"> 
+            <i class="fas fa-book"></i>
+            <p>
+                Ulasan Buku
             </p>
           </a>
       </li>

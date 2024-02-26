@@ -15,7 +15,8 @@ class Transaksi extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $belum_dipinjam, $sedang_dipinjam, $selesai_dipinjam, $search ,$datauser;        
+    public $belum_dipinjam, $sedang_dipinjam, $selesai_dipinjam, $search ,$datauser;   
+    public $tanggal_pinjam;     
 
     public function belumDipinjam()
     {
@@ -35,6 +36,7 @@ class Transaksi extends Component
 
     public function pinjam(Peminjaman $peminjaman)
     {
+       
         // kurangi stok buku setelah pinjama
         foreach ($peminjaman->detail_peminjaman as $detail_peminjaman) {
 
@@ -43,8 +45,11 @@ class Transaksi extends Component
             ]);
         }
 
+        $this->tanggal_pinjam = $peminjaman->tanggal_pinjam;
         $peminjaman->update([
             'petugas_pinjam' =>auth()->user()->id,
+            'tanggal_pinjam' => today(),
+            'tanggal_kembali' => Carbon::create($this->tanggal_pinjam)->addDays(10),
             'status' => 2
         ]);
 
@@ -57,23 +62,23 @@ class Transaksi extends Component
         $data = [
             'status' => 3,
             'petugas_kembali' => auth()->user()->id,
-             'tanggal_pengembalian' => today(),
-             'denda' =>0
+            'tanggal_pengembalian' => today(),
+            'denda' =>0
         ];
 
         // tambah stok buku setelah kembali
         foreach ($peminjaman->detail_peminjaman as $detail_peminjaman) {
-
             $detail_peminjaman->buku->update([
                 'stok' => $detail_peminjaman->buku->stok +1
             ]);
         }
 
         // denda
-        if(Carbon::create($peminjaman->tanggal_kembali)->lessThan(today())){
+        if (Carbon::create($peminjaman->tanggal_kembali)->lessThan(today())) {
             $denda = Carbon::create($peminjaman->tanggal_kembali)->diffInDays(today());
+        //   dd($denda);
             $denda *= 1000;
-            $data['denda'] = $denda ; 
+            $data['denda'] = $denda;    
         }
 
         $peminjaman->update($data);

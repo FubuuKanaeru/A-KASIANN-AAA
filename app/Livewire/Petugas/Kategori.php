@@ -36,7 +36,7 @@ public function store(){
         'slug' => Str::slug($this->nama)
     ]);
     
-    // session()->flash('Sukses', 'Data berhasil ditambahkan');
+     session()->flash('Sukses', 'Data berhasil ditambahkan');
 
      $this->format();
 }
@@ -94,8 +94,7 @@ public function destroy(ModelsKategori $kategori){
             'kategori_id' => 1
         ]);
     }
-
-
+    
    $kategori->delete();
     
    

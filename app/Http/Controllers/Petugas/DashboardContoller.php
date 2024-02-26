@@ -1,18 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Petugas;
 
 use Carbon\Carbon;
 use App\Models\Buku;
 use App\Models\User;
 use App\Models\Peminjaman;
-use Psy\Command\WhereamiCommand;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
-class DashboardpetugasContoller extends Controller
+class DashboardContoller extends Controller
 {
-    // count
-    public function dashboard(){
+    /**
+     * Handle the incoming request.
+     */
+    public $bulan_tahun;
+    
+    public function __invoke(Request $request)
+    {
 
         $user = User::count();
         $transaksi = Peminjaman::count();
@@ -49,25 +55,7 @@ class DashboardpetugasContoller extends Controller
             
         }
 
-        // Terbaru
-        $buku = Buku::limit(5)->latest()->get();
-        $user1 = User::role('anggota')->limit(5)->latest()->get();
-        $sedang_dipinjam = Peminjaman::where('status',2)->limit(5)->latest()->get();
-        $selesai_dipinjam =  Peminjaman::where('status',3)->limit(5)->latest()->get();
-
-
-        return view('petugas.dashboardpetugas',
-        compact('user','transaksi','jumbuku','count_sedang_dipinjam',
-        'count_selesai_dipinjam',
-        'count','tanggal_pengembalian',
-        'sedang_dipinjam','selesai_dipinjam',
-        'buku','user1'
-
-
-
-));
-
-   
-
-}
+        return view('petugas.dashboardpetugas',compact('user','transaksi','jumbuku','count_sedang_dipinjam','count_selesai_dipinjam','count','tanggal_pengembalian'));
+    }
+    
 }

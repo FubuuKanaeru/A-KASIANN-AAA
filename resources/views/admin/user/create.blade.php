@@ -10,8 +10,8 @@
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label for="nama">Nama</label>
-                <input wire:model="name" type="text" class="form-control" id="nama">
+                <label for="name">Nama</label>
+                <input wire:model="name" type="text" class="form-control" id="name">
                 @error('name') <small class="text-danger">{{ $message }}</small> @enderror
             </div>
             <div class="form-group">

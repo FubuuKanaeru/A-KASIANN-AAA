@@ -32,15 +32,16 @@ class Peminjaman extends Model
     public function getDendaAttribute($value)
     {
         return $value ? "Rp. {$value}" : '-';
+    }    
+
+    public function gettanggalPinjamAttribute($value)
+    {
+        return Carbon::create($value)->format('d-m-Y');
     }
-    // public function gettanggalPinjamAttribute($value)
-    // {
-    //     return Carbon::create($value)->format('d-m-Y');
-    // }
-    // public function gettanggalKembaliAttribute($value)
-    // {
-    //     return Carbon::create($value)->format('d-m-Y');
-    // }
+    public function gettanggalKembaliAttribute($value)
+    {
+        return Carbon::create($value)->format('d-m-Y');
+    }
 
 
 }

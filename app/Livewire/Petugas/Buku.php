@@ -85,7 +85,6 @@ public function store() {
 
     public function Edit(ModelsBuku $buku)
     {
-    
         $this->format();
 
         $this->edit = true;
@@ -144,12 +143,13 @@ public function store() {
 
     }
 
-public function Delete(ModelsBuku $buku){
+    public function Delete(ModelsBuku $buku){
 
     $this->format();
 
     $this->delete = true;
     $this->buku_id = $buku->id;
+    
     }
 
     public function destroy(ModelsBuku $buku)
@@ -186,19 +186,6 @@ public function Delete(ModelsBuku $buku){
     public function mount(){
 
         $this->buku1=Buku::all();
-    }
-
-    public function buatPdf(){
-
-        $data=[
-            'data_buku' => Buku::all()
-        ];
-        
-        $pdf = Pdf::loadView('pdf.laporan', $data);
-        return response()->streamDownload(function() use($pdf){
-            echo $pdf->stream();
-        },'data.pdf');
-
     }
 
     public function render()

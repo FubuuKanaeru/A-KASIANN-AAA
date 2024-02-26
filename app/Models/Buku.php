@@ -30,6 +30,11 @@ class Buku extends Model
     {
         return $this->hasMany(DetailPeminjaman::class);
     }
+   
+    public function ulasan()
+    {
+        return $this->hasMany(Ulasan::class);
+    }
 
      //muttator
      public function setJudulAttribute($value)

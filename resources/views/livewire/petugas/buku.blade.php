@@ -12,8 +12,6 @@
         <div class="card">
             <div class="card-header">
                 <span wire:click="Create" class="btn btn-sm btn-primary">Tambah</span>
-                <span wire:click="buatPdf" class="btn btn-sm btn-primary">Ekspor Pdf</span>
-              
               <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                 <input wire:model.live.throttle.500ms="search" type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -39,6 +37,7 @@
                 <th>Penulis</th>
                 <th>Kategori</th>
                 <th>Stok</th>
+                <th>Tanggal Ditambahkan</th>
                 <th widht="15%">Aksi</th>
               </tr>
         </thead>
@@ -51,12 +50,13 @@
                 <td>{{ $item -> penulis }}</td>
                 <td>{{ $item -> kategori->name }}</td>
                 <td>{{ $item -> stok }}</td>
+                <td>{{$item->created_at->diffForHumans()}}</td>
                 <td>
                 <div class="btn-group">
                     <span wire:click="Show({{ $item->id }})" class="btn btn-sm btn-success mr-2">Lihat</span>
                     @role('admin')
-                    <span wire:click="Edit({{ $item->id }})" class="btn btn-sm btn-primary mr-2">Edit</span>
-                    <span wire:click="Delete({{ $item->id }})" class="btn btn-sm btn-danger">Hapus</span>
+                    <span wire:click="Edit({{ $item->id }})" class="btn btn-sm btn-primary mr-2"><i class="fas fa-pen">Edit</i></span>
+                    <span wire:click="Delete({{ $item->id }})" class="btn btn-sm btn-danger"><i class="fas fa-trash">Hapus</i></span>
                     @endrole
                 </div>
           </td>

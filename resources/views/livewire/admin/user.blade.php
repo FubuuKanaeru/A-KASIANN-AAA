@@ -3,7 +3,7 @@
           
     @include('admin/user/create')
     @include('admin/user/edit')
-    {{-- @include('petugas/kategori/delete') --}}
+    @include('admin/user/delete')
     @include('adminlte/flash')
 
     <div class="btn-group mb-3" >
@@ -62,8 +62,9 @@
                                 </td>
                                 <td>
                                     @if ( $petugas || $anggota )
-                                    <div class="btn-group md-5">
-                                        <span wire:click="Edit" class="btn btn-sm btn-primary">Edit</span>
+                                    <div class="btn-group">
+                                        <span wire:click="Edit" class="btn btn-sm btn-warning mr-2">Edit</span>
+                                        <span wire:click="Delete" class="btn btn-sm btn-danger">hapus</span>
                                        </div>
                                     @endif 
                                </td>

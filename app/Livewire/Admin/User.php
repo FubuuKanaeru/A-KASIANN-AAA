@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\User as MOdelsuser;
+use Illuminate\Database\Events\ModelsPruned;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Validation\Rules\Password;
@@ -12,8 +13,8 @@ class User extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $admin,$petugas,$anggota,$search ,$user1,$edit;
-    public $create ,$nama ,$email ,$password ,$password_confirmation ,$user_id;
+    public $admin,$petugas,$anggota,$search ,$user1,$edit,$role,$delete;
+    public $create ,$nama ,$email ,$password ,$password_confirmation ,$user_id ,$name;
 
     protected $validationAttributes = [
         'name' => 'nama',
@@ -29,6 +30,7 @@ class User extends Component
             'password_confirmation' => 'required',
         ];
     }
+
     public function Admin()
     {
         $this->format();
@@ -67,7 +69,7 @@ class User extends Component
             'email' => $this->email,
             'password' => bcrypt($this->password)
         ]);
-
+        
         if ($this->admin) {
             $user->assignRole('admin');
         }
@@ -82,12 +84,12 @@ class User extends Component
 
 
     public function Edit(MOdelsuser $user){
-        dd($user);
-      
+
+        $this->format();
         $this->edit = true;
         $this->nama = $user->name;
         $this->email = $user->email;
-        $this->user_id = $user->id ;
+        $this->role = $user->assignRole();
     
     }
     public function update(MOdelsuser $user){
@@ -95,9 +97,9 @@ class User extends Component
         $this->validate();
     
         $user->update([
-    
-            'name' => $this->nama,
+            'name' => $this->name,
             'email' => $this->email,
+            'password' => bcrypt($this->password)
         ]);
         
         session()->flash('Sukses', 'Data berhasil diperbarui');
@@ -106,8 +108,26 @@ class User extends Component
     
     }
 
-  
-    
+    public function Delete(MOdelsuser $user){
+
+        $this->format();
+
+        $this->delete = true;
+        $this->user_id = $user->id; 
+        $this->nama = $user->name;
+        $this->email = $user->email;
+        $this->password = $user->password;
+
+    }
+    public function destroy(MOdelsuser $user)
+    {
+        
+        $user->delete();
+
+        session()->flash('Sukses', 'Data berhasil dihapus.');
+        $this->format();
+    }
+
     public function render()
     {
 
@@ -142,6 +162,8 @@ class User extends Component
         $this->petugas = false;
         $this->anggota = false;
         unset($this->create);
+        unset($this->delete);
+        unset($this->edit);
         unset($this->name);
         unset($this->email);
         unset($this->password);
