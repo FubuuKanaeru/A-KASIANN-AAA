@@ -23,8 +23,6 @@ class ChartScript extends Component
     {
         // 
     }
-    
-
     public function render()
     {
         $bulan = substr($this->bulan_tahun,-2);

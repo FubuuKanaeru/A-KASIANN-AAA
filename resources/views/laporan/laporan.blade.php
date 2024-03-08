@@ -6,7 +6,7 @@
                   <!-- /.card-header -->
                   <div class="card-body table-responsive p-0">
                     <a href="{{ route('pdf.laporan') }}">
-                      <button class="btn btn-success">Generate pdf</button>
+                      <button class="btn btn-success"><i class="fa fa-file-pdf"></i>Generate pdf</button>
                     </a>
                     <table class="table table-hover text-nowrap">
                   <thead>

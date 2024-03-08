@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Keranjang</h1>
+            <h1>Favorit</h1>
         </div>
     </div>
 
@@ -15,7 +15,7 @@
             @elseif($keranjang->status == 2)
             <strong>Tanggal Pinjam: {{$keranjang->tanggal_pinjam}}</strong>
             @else
-                <button wire:click="pinjam({{$keranjang->id}})" class="btn btn-sm btn-success">Ajukan Peminjam</button>
+                <button wire:click="pinjam({{$keranjang->id}})" class="btn btn-sm btn-success">Ajukan Peminjam<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
             @endif
         </div>
         <div>
@@ -42,7 +42,7 @@
                 </thead>
                 <tbody>
                     @foreach ($keranjang->detail_peminjaman as $item)
-                        <tr>
+                          <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$item->buku->judul}}</td>
                             <td>{{$item->buku->penulis}}</td>
@@ -66,8 +66,8 @@
                                     <button wire:click="hapus({{$keranjang->id}}, {{$item->id}})" class="btn btn-sm btn-danger">Hapus</button>
                                 @endif       
                                     @if($keranjang->status == 3)
-                                    <button wire:click="hapus({{$keranjang->id}}, {{$item->id}})" class="btn btn-sm btn-danger">Hapus</button>
-                                    <button wire:click="ulas({{ $item->buku->id }})" class="btn btn-sm btn-success">Ulas Buku</button>
+                                    <button wire:click="hapus({{$keranjang->id}}, {{$item->id}})" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>Hapus</button>
+                                    <button wire:click="ulas({{ $item->buku->id }})" class="btn btn-sm btn-success"><i class="fa fa-comment" aria-hidden="true"></i>Ulas Buku</button>
                                 @endif
                             </td>
                         </tr>

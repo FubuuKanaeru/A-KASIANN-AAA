@@ -80,9 +80,9 @@
                 @if (!$selesai_dipinjam)
                 <td>
                   @if ($item->status == 1)
-                  <span wire:click="pinjam({{ $item->id }})" class="btn btn-sm btn-success mr-2">Pinjam</span>
+                  <span wire:click="pinjam({{ $item->id }})" class="btn btn-sm btn-success mr-2">Konfirmasi</span>
                   @elseif($item->status == 2)
-                  <span wire:click="kembali({{ $item->id }})" class="btn btn-sm btn-primary mr-2">Kembali</span>
+                  <span wire:click="kembali({{ $item->id }})" class="btn btn-sm btn-primary mr-2">Kembalikan</span>
                   @endif
               </td>
             </tr>

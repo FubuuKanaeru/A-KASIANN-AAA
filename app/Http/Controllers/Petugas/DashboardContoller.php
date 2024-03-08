@@ -9,6 +9,7 @@ use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Ulasan;
 
 class DashboardContoller extends Controller
 {
@@ -23,11 +24,12 @@ class DashboardContoller extends Controller
         $user = User::count();
         $transaksi = Peminjaman::count();
         $jumbuku = Buku::count();
+        $ulasan = Ulasan::count();
         $count_sedang_dipinjam = Peminjaman::where('status',2)->count();
         $count_selesai_dipinjam =  Peminjaman::where('status',3)->count();
 
         // Chart
-        $bulan = substr(now(),-2);
+        $bulan = substr(now(), 2);
         $tahun = substr(now(), 0, 4);
 
         $selesai_dipinjam = Peminjaman::select(DB::raw('count(*) as count, tanggal_pengembalian'))
@@ -43,8 +45,8 @@ class DashboardContoller extends Controller
         $count = [];
         for ($i=1; $i <= $hari_per_bulan; $i++) { 
             for ($j=0; $j < count($selesai_dipinjam); $j++) { 
-                if (substr($selesai_dipinjam[$j]->tanggal_pengembalian, -2) == $i) {
-                    $tanggal_pengembalian[$i] = substr($selesai_dipinjam[$j]->tanggal_pengembalian, -2);
+                if (substr($selesai_dipinjam[$j]->tanggal_pengembalian, 0,2) == $i) {
+                    $tanggal_pengembalian[$i] = substr($selesai_dipinjam[$j]->tanggal_pengembalian, 0,2);
                     $count[$i] = $selesai_dipinjam[$j]->count;
                     break;
                 }else {
@@ -55,7 +57,7 @@ class DashboardContoller extends Controller
             
         }
 
-        return view('petugas.dashboardpetugas',compact('user','transaksi','jumbuku','count_sedang_dipinjam','count_selesai_dipinjam','count','tanggal_pengembalian'));
+        return view('petugas.dashboardpetugas',compact('user','transaksi','jumbuku','count_sedang_dipinjam','count_selesai_dipinjam','count','tanggal_pengembalian','ulasan'));
     }
     
 }

@@ -2,10 +2,9 @@
 
 namespace App\Livewire\Admin;
 
-use App\Models\User as MOdelsuser;
-use Illuminate\Database\Events\ModelsPruned;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\User as MOdelsuser;
 use Illuminate\Validation\Rules\Password;
 
 class User extends Component
@@ -26,9 +25,14 @@ class User extends Component
         return [
             'name' => 'required',
             'email' => ['required', 'email', 'unique:App\Models\User,email'],
+            'roles' => 'required',
             'password' => ['required', 'confirmed', Password::min(8)],
             'password_confirmation' => 'required',
         ];
+    }
+
+    public function mount(MOdelsuser $user){
+        $this->user1 = $user;
     }
 
     public function Admin()
@@ -57,7 +61,7 @@ class User extends Component
     public function Create()
     {
         $this->create = true;
-      
+
     }
 
     public function store(){
@@ -69,6 +73,7 @@ class User extends Component
             'email' => $this->email,
             'password' => bcrypt($this->password)
         ]);
+
         
         if ($this->admin) {
             $user->assignRole('admin');
@@ -87,10 +92,11 @@ class User extends Component
 
         $this->format();
         $this->edit = true;
+        $this->user1 = $user;
+        $this->user_id = $user->id;
         $this->nama = $user->name;
         $this->email = $user->email;
-        $this->role = $user->assignRole();
-    
+        
     }
     public function update(MOdelsuser $user){
     
@@ -121,7 +127,7 @@ class User extends Component
     }
     public function destroy(MOdelsuser $user)
     {
-        
+    
         $user->delete();
 
         session()->flash('Sukses', 'Data berhasil dihapus.');

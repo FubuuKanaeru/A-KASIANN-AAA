@@ -73,6 +73,7 @@
     </div>
     @else
 
+    {{-- Layout Depan --}}
     @if ($buku->isNotEmpty())
     <div class="row">
      @foreach ($buku as $item)

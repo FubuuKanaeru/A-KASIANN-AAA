@@ -16,6 +16,7 @@
                 <div class="card-header">
                     @if ($admin || $petugas || $anggota )
                     <span wire:click="Create" class="btn btn-sm btn-primary">Tambah</span>
+                    {{-- <a href="{{ url('user/create') }}" class="btn btn-primary float-end">Tambah</a> --}}
                     @endif
                   
                      
@@ -63,8 +64,8 @@
                                 <td>
                                     @if ( $petugas || $anggota )
                                     <div class="btn-group">
-                                        <span wire:click="Edit" class="btn btn-sm btn-warning mr-2">Edit</span>
-                                        <span wire:click="Delete" class="btn btn-sm btn-danger">hapus</span>
+                                        <span wire:click="Edit({{ $user_id }})" class="btn btn-sm btn-warning mr-2">Edit</span>
+                                        <span wire:click="Delete({{ $user_id }})" class="btn btn-sm btn-danger">hapus</span>
                                        </div>
                                     @endif 
                                </td>

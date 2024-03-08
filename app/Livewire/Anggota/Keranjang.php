@@ -17,7 +17,7 @@ class Keranjang extends Component
 
     // protected $rules = [
     //     'tanggal_pinjam' => 'required|date|after_or_equal:today',
-    // ];
+// 
 
     public function hapus(Peminjaman $peminjaman, DetailPeminjaman $detail_peminjaman)
     {

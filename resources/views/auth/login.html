@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
+    </head>
+    <body>
+        <div class="box">
+            <video
+                id="bg-video"
+                src="VideoBackgroundLibrary.mp4"
+                loop
+                muted
+                autoplay
+            ></video>
+
+            <div class="container">
+                <div class="top">
+                    <span> Perpustakaan </span>
+                    <header>Login</header>
+                </div>
+                <div class="input-field">
+                    <input
+                        type="text"
+                        class="input"
+                        placeholder="Email"
+                        id=""
+                    />
+                    <i class="bi bi-person-circle"></i>
+                </div>
+                <div class="input-field">
+                    <input
+                        type="password"
+                        class="input"
+                        placeholder="Password"
+                        id=""
+                    />
+                    <i class="bi bi-lock"></i>
+                </div>
+                <div class="input-field">
+                    <input type="submit" class="submit" value="login" id="" />
+                </div>
+                <div class="two-col">
+                    <div class="one">
+                        <input type="checkbox" name="" id="check" />
+                        <label for="check">REmember Me</label>
+                    </div>
+                    <div class="two">
+                        <label><a href="#">Forgot Password</a></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

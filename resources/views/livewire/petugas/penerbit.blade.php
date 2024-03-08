@@ -8,7 +8,7 @@
         
         <div class="card">
             <div class="card-header">
-                <span wire:click="Create" class="btn btn-sm btn-primary">Tambah</span>
+                <span wire:click="Create" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>Tambah</span>
                
               @if ($penerbit->isNotEmpty())
               <div class="card-tools">
@@ -39,8 +39,8 @@
                 <td>{{ $item -> nama }}</td>
                 <td>
                     <div class="btn-group">
-                    <span wire:click="Edit({{ $item->id }})" class="btn btn-sm btn-primary mr-2">Edit</span>
-                    <span wire:click="Delete({{ $item->id }})" class="btn btn-sm btn-danger">Hapus</span>
+                    <span wire:click="Edit({{ $item->id }})" class="btn btn-sm btn-warning mr-2"><i class="fas fa-pen"></i>Edit</span>
+                    <span wire:click="Delete({{ $item->id }})" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>Hapus</span>
                 </div>
           </td>
           </tr>

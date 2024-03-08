@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Buku;
 use App\Models\User;
 use App\Models\Peminjaman;
+use App\Models\Ulasan;
 use Psy\Command\WhereamiCommand;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,7 @@ class DashboardpetugasContoller extends Controller
         $user = User::count();
         $transaksi = Peminjaman::count();
         $jumbuku = Buku::count();
+        $ulasan = Ulasan::count();
         $count_sedang_dipinjam = Peminjaman::where('status',2)->count();
         $count_selesai_dipinjam =  Peminjaman::where('status',3)->count();
 
@@ -61,7 +63,7 @@ class DashboardpetugasContoller extends Controller
         'count_selesai_dipinjam',
         'count','tanggal_pengembalian',
         'sedang_dipinjam','selesai_dipinjam',
-        'buku','user1'
+        'buku','user1','ulasan'
 
 
 

@@ -10,6 +10,7 @@ use App\Models\Penerbit;
 use App\Models\Rak;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 
 class LaporanContoller extends Controller
 {
@@ -41,7 +42,6 @@ class LaporanContoller extends Controller
     }
     
 
-    // transaksi
     public function transaksilaporan(){
 
         $peminjaman = Peminjaman::all();
@@ -60,6 +60,20 @@ class LaporanContoller extends Controller
 
         $pdf = Pdf::loadView('laporan\pdf\transaksipdf',compact('peminjaman','user','detailpeminjaman'));
         return $pdf->stream('lapoaran Transaksi.pdf');
+
+    }
+
+    public function report(Request $request)
+    {
+        $user = User::all();
+        $detailpeminjaman = DetailPeminjaman::all();   
+        
+        if($request->has('tanggal_pinjam')){
+            $peminjaman = Peminjaman::whereBetween('tanggal_pinjam',[$request->tanggal_pinjam, $request->end_date])->paginate();
+        }else{
+            $peminjaman = Peminjaman::paginate();
+        }
+        return view('laporan.laporantransaksi',compact('user','detailpeminjaman','peminjaman'));
 
     }
 }

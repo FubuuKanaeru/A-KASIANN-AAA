@@ -43,5 +43,11 @@ class Peminjaman extends Model
         return Carbon::create($value)->format('d-m-Y');
     }
 
+    // public function gettanggalPengembalianAttribute($value)
+    // {
+    //     return Carbon::create($value)->format('d-m-Y');
+    // }
+
+
 
 }

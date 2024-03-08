@@ -24,7 +24,7 @@ class PeminjamanSeeder extends Seeder
 
             $user = User::create([
                 'name' =>  $faker->name(),
-                'email' => $faker->email(),
+                'email' =>   $faker->email(),
                 'password' => bcrypt('11223344'),
             ]);
 

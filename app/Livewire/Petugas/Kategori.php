@@ -75,12 +75,12 @@ public function update(ModelsKategori $kategori ){
 
         $this->delete=true;
         $this->kategori_id = $id;   
-        $this->dispatchBrowserEvent('delete');
+        // $this->dispatchBrowserEvent('delete');
 
 }
 
 public function destroy(ModelsKategori $kategori){
-    
+    // dd($kategori);
     // $kategori->rak()->delete();
     $rak = Rak::where('kategori_id', $kategori->id)->get();
     foreach ($rak as $key => $value) {
@@ -97,13 +97,11 @@ public function destroy(ModelsKategori $kategori){
     
    $kategori->delete();
     
-   
-//    session()->flash('Sukses', 'Data berhasil dihapus');
+   session()->flash('Sukses', 'Data berhasil dihapus');
 
    $this->format();
 
 }
-
     public function updatingSearch()
     {
         $this->resetPage();

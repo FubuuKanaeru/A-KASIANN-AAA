@@ -15,7 +15,6 @@
                         Kategori
                     </a>
 
-                   
                     <div class="dropdown-menu dropdown-menu-left aria-labelledby="navbarDropdown style="cursor:pointer">
                         <a class="dropdown-item" wire:click="semuaKategori">Semua Kategori</a>
                         <div class="dropdwon-divider"></div>
@@ -44,7 +43,7 @@
                 @else
                 @if ($count > 0)
                 <li class="nav-item">
-                    <a class="nav-link" href="/keranjang">Keranjang <span class="badge bg-primary">{{ $count }}</span></a>
+                    <a class="nav-link" href="/keranjang">Favorit <span class="badge bg-primary">{{ $count }}</span></a>
                 </li>
                 @endif
                     <li class="nav-item dropdown">

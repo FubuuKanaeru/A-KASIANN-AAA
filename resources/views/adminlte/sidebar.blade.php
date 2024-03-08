@@ -1,6 +1,6 @@
 
 
-<aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #0035e4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #0a0909">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src="/AdminLTE-3.2.0/Logo/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -27,7 +27,7 @@
              with font-awesome or any other icon font library -->
         <li class="nav-item ">
           <a href="/dashboard" class="nav-link @yield('active-dashboard' )">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+           <i class="fas  fa-laptop"></i>
             <p>
               Dashboard
             </p>
@@ -76,7 +76,7 @@
 {{-- Start View Transaksi --}}
         <li class="nav-item">
           <a href="/transaksi"class="nav-link"> @yield('active-transaksi ')
-            <i class="fas fa-book"></i>
+            <i class="fa fa-balance-scale" aria-hidden="true"></i>
             <p>
               Transaksi
             </p>
@@ -92,7 +92,7 @@
       </li>
         <li class="nav-item">
           <a href="/pdf/buku/laporan"class="nav-link"> @yield('active-transaksi ')
-            <i class="fas fa-book"></i>
+            <i class="fa fa-print" aria-hidden="true"></i>
             <p>
           Laporan buku
             </p>
@@ -100,15 +100,15 @@
       </li>
         <li class="nav-item">
           <a href="/pdf/transaksi/laporan"class="nav-link"> @yield('active-transaksi ')
-            <i class="fas fa-book"></i>
+            <i class="fa fa-print" aria-hidden="true"></i>
             <p>
-         Laporan Transaksi
+         Laporan Peminjam
             </p>
           </a>
       </li>
         <li class="nav-item">
           <a href="/ulasan"class="nav-link"> 
-            <i class="fas fa-book"></i>
+            <i class="fa fa-comment" aria-hidden="true"></i>
             <p>
                 Ulasan Buku
             </p>
@@ -122,7 +122,7 @@
 <li class="nav-header">Admin</li>
 <li class="nav-item">
 <a href="/user"class="nav-link"> @yield('active-user ')
-  <i class="fas fa-users"></i>
+  <i class="fa fa-user-circle" aria-hidden="true"></i>
   <p>
     Data User
   </p>

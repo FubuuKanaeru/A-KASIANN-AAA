@@ -5,10 +5,32 @@
                     <div class="card-header">
                   <!-- /.card-header -->
                   <div class="card-body table-responsive p-0">
-                    <a href="{{ route('pdf.transaksi') }}">
-                      <button class="btn btn-success">Generate PDF</button>
-                    </a>
-                    <table class="table table-hover text-nowrap">
+                    {{-- <a href="{{ route('pdf.transaksi') }}">
+                      <button class="btn btn-success"><i class="fa fa-file-pdf"></i> Generate PDF</button>
+                    </a> --}}
+                    <form action="/report" method="GET">
+                      <label for="">Cari Berdasarkan Tanggal</label>
+                      @csrf
+                      <div class="row">
+                        <div class="form-group m-4">
+                          <label for="">Tanggal Awal</label>
+                          <input name="tanggal_pinjam" type="date" class="form-control">
+                        </div>
+                      
+                      <div class="col-md-2">
+                        <div class="form-group m-4">
+                          <label for="">Tanggal Akhir</label>
+                          <input name="end_date" type="date" class="form-control">
+                        </div>
+                      </div>
+                      <div class="form-group mt-5">
+                        <div class="col-md-4 mt-2">
+                          <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                      </div>
+                    </div>
+                    </form>
+                    <table id="example1" class="table table-bordered table-striped">
     <thead>
       <tr>
         <th>No</th>
@@ -37,7 +59,13 @@
           </ul>
           </td>
           <td>{{ $item->denda }}</td>
-          <td>{{ $item->status }}</td>
+          <td>
+            @if ($item->status == 3)
+               <span>Selesai Dipinjam</span>
+            @elseif($item->status == 2)
+            <span>Sedang Dipinjam</span>
+            @endif
+          </td>
       </tr>
       @endforeach
     </tbody>

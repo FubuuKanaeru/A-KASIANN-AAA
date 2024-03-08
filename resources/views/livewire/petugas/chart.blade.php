@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
-            <input  wire:model.live="bulan_tahun" type="month" class="form-control" max="{{date('Y-m')}}">
+            <input wire:model.live="bulan_tahun" type="month" class="form-control" max="{{date('Y-m')}}">
         </div>
     </div>
 

@@ -49,8 +49,9 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/pdf/buku/laporan/pdf',[LaporanContoller::class,'generatebuku'])->name('pdf.laporan');
         
     // Generate transaksi laporan
-    Route::get('/pdf/transaki/laporan',[LaporanContoller::class,'generatetransaksi'])->name('pdf.transaksi');
+    // Route::get('/pdf/transaki/laporan',[LaporanContoller::class,'generatetransaksi'])->name('pdf.transaksi');
     Route::get('/pdf/transaksi/laporan',[LaporanContoller::class,'transaksilaporan']);
+    Route::get('/report',[LaporanContoller::class,'report']);
     // ulasan
     Route::get('/dashboard/ulasan',[UlasanController::class,'ulasan']);
     Route::delete('/dashboard/delete/{$id}',[UlasanController::class,'delete']);
